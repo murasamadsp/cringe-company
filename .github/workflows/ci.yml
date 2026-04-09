@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  checks:
+    name: Static checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate index file exists
+        run: |
+          if [ ! -f index.html ]; then
+            echo "index.html is missing"
+            exit 1
+          fi
+
+      - name: Basic HTML sanity checks
+        run: |
+          if ! grep -qi "<!DOCTYPE html>" index.html; then
+            echo "Missing DOCTYPE declaration"
+            exit 1
+          fi
+
+          if ! grep -q "<body" index.html; then
+            echo "Missing <body> tag"
+            exit 1
+          fi
+
+          if ! grep -q "</html>" index.html; then
+            echo "Missing closing </html> tag"
+            exit 1
+          fi
+
+          python - <<'PY'
+          from pathlib import Path
+          text = Path("index.html").read_text(encoding="utf-8")
+          required = ["id=\"particleCanvas\"", "class=\"nav\"", "id=\"notifyForm\""]
+          for marker in required:
+              if marker not in text:
+                  raise SystemExit(f"Missing required marker: {marker}")
+          print("index.html checks passed")
+          PY
