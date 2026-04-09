@@ -16,6 +16,14 @@ jobs:
 
       - name: Validate index file exists
         run: |
+          if [ ! -f styles.css ]; then
+            echo "styles.css is missing"
+            exit 1
+          fi
+          if [ ! -f main.js ]; then
+            echo "main.js is missing"
+            exit 1
+          fi
           if [ ! -f index.html ]; then
             echo "index.html is missing"
             exit 1
@@ -35,6 +43,14 @@ jobs:
 
           if ! grep -q "</html>" index.html; then
             echo "Missing closing </html> tag"
+            exit 1
+          fi
+          if ! grep -q 'href="./styles.css"' index.html; then
+            echo "Main stylesheet link is missing or changed"
+            exit 1
+          fi
+          if ! grep -q 'src="./main.js"' index.html; then
+            echo "Main script link is missing or changed"
             exit 1
           fi
 
