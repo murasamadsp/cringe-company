@@ -45,11 +45,11 @@ jobs:
             echo "Missing closing </html> tag"
             exit 1
           fi
-          if ! grep -q 'href="./styles.css"' index.html; then
+          if ! grep -Eq 'href="(\./)?styles\.css"' index.html; then
             echo "Main stylesheet link is missing or changed"
             exit 1
           fi
-          if ! grep -q 'src="./main.js"' index.html; then
+          if ! grep -Eq 'src="(\./)?main\.js"' index.html; then
             echo "Main script link is missing or changed"
             exit 1
           fi
