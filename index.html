@@ -801,6 +801,32 @@
   </div>
 
   <script>
+    const resetScrollPosition = () => {
+      if (window.location.hash) return;
+      if (window.scrollY > 0) {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "auto",
+        });
+      }
+    };
+    try {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      if (document.readyState === "loading") {
+        window.addEventListener("DOMContentLoaded", resetScrollPosition);
+      } else {
+        resetScrollPosition();
+      }
+      window.addEventListener("pageshow", () => {
+        resetScrollPosition();
+      });
+    } catch (error) {
+      // ignore browsers that do not support pageshow behavior
+    }
+
     const canvas = document.getElementById("particleCanvas");
     const ctx = canvas ? canvas.getContext("2d") : null;
     const launchPanel = document.getElementById("launchPanel");
