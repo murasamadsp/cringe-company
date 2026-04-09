@@ -316,6 +316,7 @@ h1 {
 
 .title-grad {
   background: linear-gradient(90deg, #ffffff, #9ad0ff, #ffb07c);
+  background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
