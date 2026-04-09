@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="cringe.company — premium coming soon landing page." />
+  <meta name="description" content="cringe.company — премиум landing-заглушка для нового цифрового продукта." />
+  <meta property="og:title" content="cringe.company — Coming soon" />
+  <meta property="og:description" content="cringe.company — красивая сторожка-заглушка до запуска проекта." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cringe.company/" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta name="theme-color" content="#050913" />
+  <link rel="canonical" href="https://cringe.company/" />
   <title>cringe.company — Coming soon</title>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
-
     :root {
       --bg-0: #050913;
       --bg-1: #070f2a;
@@ -24,6 +29,12 @@
       --radius-sm: 14px;
       --container: 1200px;
       --transition: 300ms cubic-bezier(0.2, 0.9, 0.2, 1);
+      --font-display: "Syne", "Trebuchet MS", "Segoe UI", sans-serif;
+      --font-body: "Space Grotesk", "Inter", "Arial", sans-serif;
+      --page-background: radial-gradient(1200px 700px at 8% 12%, rgba(111, 224, 255, 0.13), transparent),
+        radial-gradient(900px 650px at 90% 14%, rgba(141, 155, 255, 0.15), transparent),
+        radial-gradient(1000px 800px at 100% 85%, rgba(255, 142, 83, 0.15), transparent),
+        linear-gradient(160deg, var(--bg-0), var(--bg-1), var(--bg-2));
     }
 
     * {
@@ -36,19 +47,20 @@
     html,
     body {
       min-height: 100%;
+      width: 100%;
+      height: 100%;
+      background: var(--page-background);
+      overscroll-behavior: none;
     }
 
     body {
-      font-family: "Space Grotesk", system-ui, sans-serif;
-      background:
-        radial-gradient(1200px 700px at 8% 12%, rgba(111, 224, 255, 0.13), transparent),
-        radial-gradient(900px 650px at 90% 14%, rgba(141, 155, 255, 0.15), transparent),
-        radial-gradient(1000px 800px at 100% 85%, rgba(255, 142, 83, 0.15), transparent),
-        linear-gradient(160deg, var(--bg-0), var(--bg-1), var(--bg-2));
+      font-family: var(--font-body);
+      background: var(--page-background);
       color: var(--text);
       line-height: 1.5;
       overflow-x: hidden;
       position: relative;
+      overscroll-behavior: none;
     }
 
     body::before {
@@ -186,7 +198,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-size: 13px;
-      font-family: "Syne", sans-serif;
+      font-family: var(--font-display);
       font-weight: 700;
     }
 
@@ -216,6 +228,14 @@
       font-size: 13px;
       margin-left: 18px;
       transition: color var(--transition);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .nav a:hover {
@@ -275,7 +295,7 @@
     }
 
     h1 {
-      font-family: "Syne", sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(2rem, 4vw, 4rem);
       line-height: 1.05;
       letter-spacing: 0.02em;
@@ -299,7 +319,7 @@
 
     .type-wrap {
       margin-bottom: 18px;
-      font-family: "Syne", sans-serif;
+      font-family: var(--font-display);
       font-size: clamp(1.2rem, 2vw, 2rem);
       min-height: 54px;
     }
@@ -404,7 +424,7 @@
     .count-item strong {
       display: block;
       font-size: 1.8rem;
-      font-family: "Syne", sans-serif;
+      font-family: var(--font-display);
       color: var(--text);
     }
 
@@ -430,7 +450,7 @@
 
     .section h2 {
       margin-bottom: 14px;
-      font-family: "Syne", sans-serif;
+      font-family: var(--font-display);
       font-size: 1.5rem;
       letter-spacing: 0.03em;
       text-transform: uppercase;
@@ -625,10 +645,14 @@
 
       .nav {
         padding: 12px;
+        gap: 12px;
+        align-items: flex-start;
+        flex-wrap: wrap;
       }
 
       .nav-links {
-        display: none;
+        width: 100%;
+        justify-content: flex-start;
       }
     }
   </style>
@@ -675,7 +699,11 @@
         </div>
       </div>
 
-      <aside class="glow-panel">
+      <aside
+        class="glow-panel"
+        id="launchPanel"
+        data-launch-date="2026-06-01T00:00:00Z"
+      >
         <p class="clock">Launch timer</p>
         <div class="counter" id="counter">
           <div class="count-item">
@@ -734,7 +762,10 @@
 
     <section class="section reveal" id="notify">
       <h2>Keep in orbit</h2>
-      <p>Leave your email and we'll send you a short update as soon as the domain is live in production.</p>
+      <p>
+        Leave your email and we'll send you a short update as soon as the domain is live in production.
+        Demo note: currently this form keeps email only in browser storage for placeholder testing.
+      </p>
       <form class="notify" id="notifyForm">
         <label class="sr-only" for="email">Email for launch updates</label>
         <input
@@ -759,26 +790,35 @@
   <script>
     const canvas = document.getElementById("particleCanvas");
     const ctx = canvas ? canvas.getContext("2d") : null;
+    const launchPanel = document.getElementById("launchPanel");
     let dots = [];
-    const baseCount = 110;
+    const baseCount = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4 ? 48 : 110;
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const hasCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    const isLowPowerDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) || hasCoarsePointer;
+    const maxLineLinks = isLowPowerDevice ? 40 : 70;
+    const particleFrameSkip = isLowPowerDevice ? 1 : 0;
+    let skipNextParticleFrame = 0;
+    let viewportWidth = window.innerWidth;
+    let viewportHeight = window.innerHeight;
     let particleFrame = 0;
     let particleRunning = false;
-    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function getParticleCount() {
-      const area = window.innerWidth * window.innerHeight;
-      const estimatedCount = Math.round(area / 7000);
+      const densityDivisor = isLowPowerDevice ? 9000 : 7000;
+      const area = viewportWidth * viewportHeight;
+      const estimatedCount = Math.round(area / densityDivisor);
       return Math.max(28, Math.min(baseCount, estimatedCount));
     }
 
     function syncCanvasSize() {
       if (!ctx || reducedMotionQuery.matches) return;
       const ratio = window.devicePixelRatio || 1;
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+      viewportWidth = window.innerWidth;
+      viewportHeight = window.innerHeight;
 
-      canvas.width = Math.floor(width * ratio);
-      canvas.height = Math.floor(height * ratio);
+      canvas.width = Math.floor(viewportWidth * ratio);
+      canvas.height = Math.floor(viewportHeight * ratio);
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
@@ -788,8 +828,8 @@
       if (!dots.length) {
         for (let i = 0; i < count; i += 1) {
           dots.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
+            x: Math.random() * viewportWidth,
+            y: Math.random() * viewportHeight,
             r: 0.8 + Math.random() * 2.4,
             vx: -0.35 + Math.random() * 0.7,
             vy: -0.35 + Math.random() * 0.7,
@@ -808,28 +848,39 @@
         return;
       }
 
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      if (skipNextParticleFrame > 0) {
+        skipNextParticleFrame -= 1;
+        particleFrame = requestAnimationFrame(step);
+        return;
+      }
+      if (particleFrameSkip > 0) {
+        skipNextParticleFrame = particleFrameSkip;
+      }
+
+      ctx.clearRect(0, 0, viewportWidth, viewportHeight);
       for (let i = 0; i < dots.length; i += 1) {
         const d = dots[i];
         d.x += d.vx;
         d.y += d.vy;
 
-        if (d.x < 0 || d.x > window.innerWidth) d.vx = -d.vx;
-        if (d.y < 0 || d.y > window.innerHeight) d.vy = -d.vy;
+        if (d.x < 0 || d.x > viewportWidth) d.vx = -d.vx;
+        if (d.y < 0 || d.y > viewportHeight) d.vy = -d.vy;
 
-        for (let j = i + 1; j < dots.length; j += 1) {
-          const e = dots[j];
-          const dx = d.x - e.x;
-          const dy = d.y - e.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < d.s) {
-            const alpha = 1 - dist / d.s;
-            ctx.strokeStyle = `rgba(109,224,255,${alpha * 0.08})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(d.x, d.y);
-            ctx.lineTo(e.x, e.y);
-            ctx.stroke();
+        if (dots.length <= maxLineLinks) {
+          for (let j = i + 1; j < dots.length; j += 1) {
+            const e = dots[j];
+            const dx = d.x - e.x;
+            const dy = d.y - e.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < d.s) {
+              const alpha = 1 - dist / d.s;
+              ctx.strokeStyle = `rgba(109,224,255,${alpha * 0.08})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath();
+              ctx.moveTo(d.x, d.y);
+              ctx.lineTo(e.x, e.y);
+              ctx.stroke();
+            }
           }
         }
 
@@ -864,13 +915,18 @@
     }
 
     window.addEventListener("resize", restartParticleLoop);
-    reducedMotionQuery.addEventListener("change", () => {
-      if (reducedMotionQuery.matches) {
+    function handleReducedMotionChange(event) {
+      if (event.matches) {
         stopParticleLoop();
       } else {
         startParticleLoop();
       }
-    });
+    }
+    if (typeof reducedMotionQuery.addEventListener === "function") {
+      reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
+    } else if (typeof reducedMotionQuery.addListener === "function") {
+      reducedMotionQuery.addListener(handleReducedMotionChange);
+    }
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         stopParticleLoop();
@@ -913,8 +969,11 @@
     typeWord.textContent = "";
     setTimeout(pulseType, 400);
 
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 37);
+    const targetDateConfig = launchPanel && launchPanel.dataset && launchPanel.dataset.launchDate;
+    const fallbackDate = new Date();
+    fallbackDate.setDate(fallbackDate.getDate() + 37);
+    const parsedLaunchDate = targetDateConfig ? new Date(targetDateConfig) : null;
+    const targetDate = parsedLaunchDate && !Number.isNaN(parsedLaunchDate.getTime()) ? parsedLaunchDate : fallbackDate;
     const get = (id) => document.getElementById(id);
     let countdownTimer = null;
 
@@ -990,7 +1049,7 @@
 
     if (storageAvailable) {
       const savedEmail = localStorage.getItem(notifyStorageKey);
-      if (savedEmail) notifyStatus.textContent = "We already have your email.";
+      if (savedEmail) notifyStatus.textContent = "Demo mode: we already have your email saved for this browser.";
     }
 
     form.addEventListener("submit", (event) => {
@@ -1011,7 +1070,9 @@
       }
 
       form.reset();
-      notifyStatus.textContent = "Thank you — we will notify you when we launch.";
+      notifyStatus.textContent = storageAvailable
+        ? "Thanks — demo mode: saved locally for this browser. We'll wire real notifications later."
+        : "Thanks — demo mode: submission accepted this session.";
     });
   </script>
 </body>

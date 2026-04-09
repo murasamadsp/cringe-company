@@ -40,10 +40,21 @@ jobs:
 
           python - <<'PY'
           from pathlib import Path
+          import re
+          from datetime import datetime
           text = Path("index.html").read_text(encoding="utf-8")
           required = ["id=\"particleCanvas\"", "class=\"nav\"", "id=\"notifyForm\""]
           for marker in required:
               if marker not in text:
                   raise SystemExit(f"Missing required marker: {marker}")
+
+          # Enforce configurable launch date for countdown section.
+          launch_match = re.search(r'id=\"launchPanel\".*data-launch-date=\"([^\"]+)\"', text, re.S)
+          if not launch_match:
+              raise SystemExit("Missing launch panel launch date marker: id=\"launchPanel\" and data-launch-date")
+
+          launch_date_value = launch_match.group(1).strip()
+          normalized_launch_date = launch_date_value.replace("Z", "+00:00")
+          datetime.fromisoformat(normalized_launch_date)
           print("index.html checks passed")
           PY
