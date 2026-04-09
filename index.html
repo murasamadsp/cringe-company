@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="cringe.company — premium coming soon landing page." />
+  <title>cringe.company — Coming soon</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+    :root {
+      --bg-0: #050913;
+      --bg-1: #070f2a;
+      --bg-2: #0d1638;
+      --card: rgba(11, 24, 53, 0.62);
+      --text: #e9f2ff;
+      --muted: #9db0cb;
+      --accent: #6de0ff;
+      --accent-2: #ff8e53;
+      --accent-3: #8d9bff;
+      --line: rgba(128, 168, 255, 0.24);
+      --shadow: 0 20px 50px rgba(4, 11, 32, 0.55);
+      --radius-lg: 22px;
+      --radius-sm: 14px;
+      --container: 1200px;
+      --transition: 300ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 8% 12%, rgba(111, 224, 255, 0.13), transparent),
+        radial-gradient(900px 650px at 90% 14%, rgba(141, 155, 255, 0.15), transparent),
+        radial-gradient(1000px 800px at 100% 85%, rgba(255, 142, 83, 0.15), transparent),
+        linear-gradient(160deg, var(--bg-0), var(--bg-1), var(--bg-2));
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.16;
+      pointer-events: none;
+      z-index: 2;
+      mix-blend-mode: soft-light;
+    }
+
+    #particleCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.4;
+      filter: blur(0.2px);
+    }
+
+    .aurora {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+      mix-blend-mode: screen;
+    }
+
+    .aurora .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(42px);
+      opacity: 0.26;
+      animation: drift 24s linear infinite;
+    }
+
+    .blob.one {
+      width: 450px;
+      height: 450px;
+      left: -120px;
+      top: 30%;
+      background: radial-gradient(circle at 20% 20%, rgba(109, 224, 255, 0.8), transparent 60%);
+      animation-duration: 46s;
+    }
+
+    .blob.two {
+      width: 540px;
+      height: 540px;
+      right: -120px;
+      top: 5%;
+      background: radial-gradient(circle at 20% 20%, rgba(255, 142, 83, 0.9), transparent 65%);
+      animation-duration: 56s;
+    }
+
+    .blob.three {
+      width: 500px;
+      height: 500px;
+      left: 30%;
+      bottom: -180px;
+      background: radial-gradient(circle at 20% 20%, rgba(141, 155, 255, 0.8), transparent 58%);
+      animation-duration: 52s;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(18px, -14px, 0) scale(1.05);
+      }
+
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+          0deg,
+          transparent 0,
+          transparent 98px,
+          rgba(255, 255, 255, 0.02) 98px,
+          rgba(255, 255, 255, 0.02) 99px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0,
+          transparent 98px,
+          rgba(255, 255, 255, 0.02) 98px,
+          rgba(255, 255, 255, 0.02) 99px
+        );
+      opacity: 0.08;
+      mix-blend-mode: soft-light;
+    }
+
+    .page {
+      position: relative;
+      z-index: 4;
+      width: min(var(--container), calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 24px 0 60px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 16px;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(90deg, rgba(9, 17, 43, 0.84), rgba(9, 17, 43, 0.52));
+      border: 1px solid rgba(126, 170, 255, 0.22);
+      border-radius: 999px;
+      padding: 14px 20px;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+    }
+
+    .brand .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.35);
+      }
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      margin-left: 18px;
+      transition: color var(--transition);
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 74vh;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(137, 158, 255, 0.3);
+      padding: 58px;
+      background: linear-gradient(145deg, rgba(10, 18, 42, 0.82), rgba(8, 15, 40, 0.82));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), var(--shadow);
+      overflow: hidden;
+      margin-bottom: 32px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(109, 224, 255, 0.08), transparent 32%, rgba(255, 142, 83, 0.08));
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(109, 224, 255, 0.4);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .tag .beam {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent);
+      animation: pulse 1.3s infinite;
+    }
+
+    h1 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      text-wrap: balance;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .title-grad {
+      background: linear-gradient(90deg, #ffffff, #9ad0ff, #ffb07c);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      max-width: 70ch;
+      font-size: 1rem;
+      margin-bottom: 28px;
+    }
+
+    .type-wrap {
+      margin-bottom: 18px;
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.2rem, 2vw, 2rem);
+      min-height: 54px;
+    }
+
+    .type-word {
+      color: var(--accent-3);
+      border-right: 1px solid rgba(255, 255, 255, 0.55);
+      padding-right: 7px;
+      animation: blink 1s steps(2) infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #88caff);
+      color: #04112a;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(109, 224, 255, 0.35);
+    }
+
+    .btn-ghost {
+      color: var(--muted);
+      border: 1px solid rgba(146, 172, 255, 0.46);
+      background: rgba(11, 20, 40, 0.24);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      color: var(--text);
+    }
+
+    .glow-panel {
+      position: relative;
+      border-radius: var(--radius-sm);
+      padding: 30px;
+      background: var(--card);
+      border: 1px solid rgba(148, 171, 255, 0.25);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      z-index: 1;
+    }
+
+    .glow-panel .clock {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .counter {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .count-item {
+      background: rgba(7, 14, 34, 0.8);
+      border: 1px solid rgba(126, 160, 255, 0.24);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .count-item span:first-child {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .count-item strong {
+      display: block;
+      font-size: 1.8rem;
+      font-family: "Syne", sans-serif;
+      color: var(--text);
+    }
+
+    .section {
+      margin: 28px 0;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(10, 18, 40, 0.32);
+      border: 1px solid rgba(132, 160, 255, 0.25);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .section h2 {
+      margin-bottom: 14px;
+      font-family: "Syne", sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .section p {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .features {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .feature {
+      position: relative;
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(126, 162, 255, 0.22);
+      background: linear-gradient(165deg, rgba(12, 23, 52, 0.8), rgba(10, 18, 39, 0.62));
+      transform-style: preserve-3d;
+      --rx: 0deg;
+      --ry: 0deg;
+      transition: transform 200ms ease;
+    }
+
+    .feature:hover {
+      transform: perspective(800px) rotateX(var(--rx)) rotateY(var(--ry));
+    }
+
+    .feature h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .feature p {
+      font-size: 0.92rem;
+      margin: 0;
+      color: #c7d7ef;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+      padding-left: 18px;
+      border-left: 1px dashed var(--line);
+    }
+
+    .step {
+      position: relative;
+      padding-left: 16px;
+      color: var(--muted);
+    }
+
+    .step::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 9px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 12px rgba(255, 142, 83, 0.6);
+    }
+
+    .step strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.78rem;
+    }
+
+    .notify {
+      display: grid;
+      gap: 12px;
+      align-items: end;
+      grid-template-columns: 1fr auto;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .notify input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(142, 173, 255, 0.32);
+      background: rgba(8, 13, 32, 0.5);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+
+    .notify input:focus {
+      border-color: rgba(109, 224, 255, 0.9);
+      box-shadow: 0 0 0 4px rgba(109, 224, 255, 0.15);
+    }
+
+    .notify-status {
+      grid-column: 1 / -1;
+      min-height: 1.2em;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .noise,
+      .aurora,
+      #particleCanvas,
+      body::before {
+        display: none;
+      }
+
+      .type-word {
+        border-right: 0;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .footer {
+      margin-top: 24px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(126, 160, 255, 0.2);
+      background: rgba(8, 16, 38, 0.56);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 500ms var(--transition), transform 500ms var(--transition);
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 38px;
+      }
+
+      .notify {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: min(100%, calc(100% - 1rem));
+      }
+
+      .hero {
+        padding: 30px;
+      }
+
+      .nav {
+        padding: 12px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particleCanvas"></canvas>
+
+  <div class="aurora" aria-hidden="true">
+    <span class="blob one"></span>
+    <span class="blob two"></span>
+    <span class="blob three"></span>
+  </div>
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>cringe.company</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#notify">Notify</a>
+      </nav>
+    </header>
+
+    <section class="hero reveal">
+      <div class="hero-inner">
+        <p class="tag"><span class="beam"></span> Creative digital space reserved</p>
+        <h1>
+          We are building a
+          <span class="title-grad">new kind of web presence</span>
+        </h1>
+        <p class="subtitle">
+          cringe.company is under development. The future home of a high-end digital platform with bold visuals, experimental UX
+          and fast, adaptive technology. For now, enjoy this cinematic preview.
+        </p>
+        <div class="type-wrap">Current mode: <span class="type-word" id="typeWord">experimental</span></div>
+        <div class="cta-row">
+          <a href="#notify" class="btn btn-primary">Get launch updates</a>
+          <a href="mailto:hello@cringe.company" class="btn btn-ghost">hello@cringe.company</a>
+        </div>
+      </div>
+
+      <aside class="glow-panel">
+        <p class="clock">Launch timer</p>
+        <div class="counter" id="counter">
+          <div class="count-item">
+            <span>Days</span><strong id="days">00</strong>
+          </div>
+          <div class="count-item">
+            <span>Hours</span><strong id="hours">00</strong>
+          </div>
+          <div class="count-item">
+            <span>Minutes</span><strong id="minutes">00</strong>
+          </div>
+          <div class="count-item">
+            <span>Seconds</span><strong id="seconds">00</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section reveal" id="about">
+      <h2>What to expect</h2>
+      <p>Three core zones of experience are being designed for the launch version: sensory landing, product showcase and community layer.</p>
+      <div class="features">
+        <article class="feature" data-tilt>
+          <h3>01 | Adaptive Interface</h3>
+          <p>Context aware layout with smooth transitions and motion tuned to avoid discomfort while keeping the visual impact high.</p>
+        </article>
+        <article class="feature" data-tilt>
+          <h3>02 | Motion Language</h3>
+          <p>Layered gradients, particle systems and parallax depth that make every scroll feel intentional and cinematic.</p>
+        </article>
+        <article class="feature" data-tilt>
+          <h3>03 | Performance First</h3>
+          <p>Optimized loading, minimal third-party resources and clean markup so the page stays fast even on mobile data.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="roadmap">
+      <h2>Roadmap</h2>
+      <p>A compact 60-day launch cycle for a clean, memorable release experience.</p>
+      <div class="timeline">
+        <div class="step">
+          <strong>Phase 1 · Design lock</strong>
+          Premium visual system finalization, typography and motion vocabulary.
+        </div>
+        <div class="step">
+          <strong>Phase 2 · Performance hardening</strong>
+          Accessibility validation, responsive behavior and reduced motion mode.
+        </div>
+        <div class="step">
+          <strong>Phase 3 · Final rollout</strong>
+          DNS + GitHub Pages launch, custom domain propagation, analytics and announcements.
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="notify">
+      <h2>Keep in orbit</h2>
+      <p>Leave your email and we'll send you a short update as soon as the domain is live in production.</p>
+      <form class="notify" id="notifyForm">
+        <label class="sr-only" for="email">Email for launch updates</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="you@domain.com"
+          autocomplete="email"
+          required
+          aria-label="Email for launch updates"
+        />
+        <button class="btn btn-primary" type="submit">Send</button>
+        <p id="notifyStatus" class="notify-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <p>cringe.company · reserved for production | Built as a cinematic stub landing page for GitHub Pages</p>
+    </footer>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("particleCanvas");
+    const ctx = canvas ? canvas.getContext("2d") : null;
+    let dots = [];
+    const baseCount = 110;
+    let particleFrame = 0;
+    let particleRunning = false;
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function getParticleCount() {
+      const area = window.innerWidth * window.innerHeight;
+      const estimatedCount = Math.round(area / 7000);
+      return Math.max(28, Math.min(baseCount, estimatedCount));
+    }
+
+    function syncCanvasSize() {
+      if (!ctx || reducedMotionQuery.matches) return;
+      const ratio = window.devicePixelRatio || 1;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+      const count = getParticleCount();
+      if (dots.length !== count) dots = [];
+      if (!dots.length) {
+        for (let i = 0; i < count; i += 1) {
+          dots.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: 0.8 + Math.random() * 2.4,
+            vx: -0.35 + Math.random() * 0.7,
+            vy: -0.35 + Math.random() * 0.7,
+            p: 0.22 + Math.random() * 0.35,
+            c: Math.random() > 0.5 ? [109, 224, 255] : [141, 155, 255],
+            s: 40 + Math.random() * 80,
+          });
+        }
+      }
+    }
+
+    function step() {
+      if (!ctx || reducedMotionQuery.matches || document.hidden) {
+        particleRunning = false;
+        particleFrame = 0;
+        return;
+      }
+
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      for (let i = 0; i < dots.length; i += 1) {
+        const d = dots[i];
+        d.x += d.vx;
+        d.y += d.vy;
+
+        if (d.x < 0 || d.x > window.innerWidth) d.vx = -d.vx;
+        if (d.y < 0 || d.y > window.innerHeight) d.vy = -d.vy;
+
+        for (let j = i + 1; j < dots.length; j += 1) {
+          const e = dots[j];
+          const dx = d.x - e.x;
+          const dy = d.y - e.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < d.s) {
+            const alpha = 1 - dist / d.s;
+            ctx.strokeStyle = `rgba(109,224,255,${alpha * 0.08})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(e.x, e.y);
+            ctx.stroke();
+          }
+        }
+
+        ctx.fillStyle = `rgba(${d.c[0]}, ${d.c[1]}, ${d.c[2]}, ${Math.min(0.95, Math.max(0.06, d.p))})`;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      particleFrame = requestAnimationFrame(step);
+    }
+
+    function stopParticleLoop() {
+      if (!particleRunning) return;
+      if (particleFrame) {
+        cancelAnimationFrame(particleFrame);
+      }
+      particleRunning = false;
+      particleFrame = 0;
+    }
+
+    function startParticleLoop() {
+      if (!ctx || reducedMotionQuery.matches || document.hidden || particleRunning) return;
+      syncCanvasSize();
+      particleRunning = true;
+      particleFrame = requestAnimationFrame(step);
+    }
+
+    function restartParticleLoop() {
+      stopParticleLoop();
+      dots = [];
+      startParticleLoop();
+    }
+
+    window.addEventListener("resize", restartParticleLoop);
+    reducedMotionQuery.addEventListener("change", () => {
+      if (reducedMotionQuery.matches) {
+        stopParticleLoop();
+      } else {
+        startParticleLoop();
+      }
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopParticleLoop();
+      } else {
+        startParticleLoop();
+      }
+    });
+    startParticleLoop();
+
+    const words = ["experimental", "minimalist", "futuristic", "audacious"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let direction = "forward";
+    const typeWord = document.getElementById("typeWord");
+
+    function pulseType() {
+      const word = words[wordIndex];
+      const isTyping = direction === "forward";
+      charIndex += isTyping ? 1 : -1;
+
+      if (charIndex < 0) charIndex = 0;
+      if (charIndex > word.length) charIndex = word.length;
+
+      typeWord.textContent = word.slice(0, charIndex);
+
+      let delay = isTyping ? 70 : 35;
+
+      if (isTyping && charIndex === word.length) {
+        direction = "backward";
+        delay = 900;
+      } else if (!isTyping && charIndex === 0) {
+        direction = "forward";
+        wordIndex = (wordIndex + 1) % words.length;
+        delay = 330;
+      }
+
+      setTimeout(pulseType, delay);
+    }
+
+    typeWord.textContent = "";
+    setTimeout(pulseType, 400);
+
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 37);
+    const get = (id) => document.getElementById(id);
+    let countdownTimer = null;
+
+    function stopTimer() {
+      if (countdownTimer) {
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+      }
+    }
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = targetDate - now;
+      if (diff <= 0) {
+        get("days").textContent = "00";
+        get("hours").textContent = "00";
+        get("minutes").textContent = "00";
+        get("seconds").textContent = "00";
+        stopTimer();
+        return;
+      }
+      const day = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hour = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minute = Math.floor((diff / (1000 * 60)) % 60);
+      const sec = Math.floor((diff / 1000) % 60);
+      get("days").textContent = String(day).padStart(2, "0");
+      get("hours").textContent = String(hour).padStart(2, "0");
+      get("minutes").textContent = String(minute).padStart(2, "0");
+      get("seconds").textContent = String(sec).padStart(2, "0");
+    }
+    updateTimer();
+    countdownTimer = setInterval(updateTimer, 1000);
+
+    const obs = new IntersectionObserver(
+      (items) => {
+        items.forEach((item) => {
+          if (item.isIntersecting) item.target.classList.add("show");
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".reveal").forEach((node) => obs.observe(node));
+
+    document.querySelectorAll("[data-tilt]").forEach((el) => {
+      el.addEventListener("pointermove", (event) => {
+        const box = el.getBoundingClientRect();
+        const px = ((event.clientX - box.left) / box.width) * 2 - 1;
+        const py = ((event.clientY - box.top) / box.height) * 2 - 1;
+        el.style.setProperty("--rx", `${-py * 5}deg`);
+        el.style.setProperty("--ry", `${px * 7}deg`);
+      });
+      el.addEventListener("pointerleave", () => {
+        el.style.setProperty("--rx", "0deg");
+        el.style.setProperty("--ry", "0deg");
+      });
+    });
+
+    const email = document.getElementById("email");
+    const form = document.getElementById("notifyForm");
+    const notifyStatus = document.getElementById("notifyStatus");
+    const notifyStorageKey = "notifyEmail";
+    let storageAvailable = false;
+
+    (function detectStorage() {
+      try {
+        localStorage.setItem("__probe__", "1");
+        localStorage.removeItem("__probe__");
+        storageAvailable = true;
+      } catch (error) {
+        storageAvailable = false;
+      }
+    })();
+
+    if (storageAvailable) {
+      const savedEmail = localStorage.getItem(notifyStorageKey);
+      if (savedEmail) notifyStatus.textContent = "We already have your email.";
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const currentEmail = email.value.trim();
+
+      if (!currentEmail || !email.checkValidity()) {
+        notifyStatus.textContent = "Please enter a valid email.";
+        return;
+      }
+
+      if (storageAvailable) {
+        try {
+          localStorage.setItem(notifyStorageKey, currentEmail);
+        } catch (error) {
+          storageAvailable = false;
+        }
+      }
+
+      form.reset();
+      notifyStatus.textContent = "Thank you — we will notify you when we launch.";
+    });
+  </script>
+</body>
+</html>
